@@ -23,13 +23,13 @@
       </li>
 
       <!-- Menu Berita  -->
-      <li>
+      <!-- <li>
       <a href="#"><i class="fa fa-newspaper-o "></i> Berita<span class="fa arrow"></span></a>
       <ul class="nav nav-second-level">
         <li><a href="#">Data Berita</a></li>
         <li><a href="#">Tambah Berita</a></li>
       </ul>
-      </li>
+      </li> -->
 
       <!-- Menu Buku  -->
       <li>
@@ -37,6 +37,7 @@
       <ul class="nav nav-second-level">
         <li><a href="./buku-list.php">Data Buku</a></li>
         <li><a href="#">Tambah buku</a></li>
+        <li><a href="#">Data Jenis Buku</a></li>
         <li><a href="#">Kelola File Buku (E-book)</a></li>
       </ul>
       </li>
@@ -51,14 +52,14 @@
       </li>
 
       <!-- Tabel Referensi  -->
-      <li>
+      <!-- <li>
       <a href="#"><i class="fa fa-tags "></i> Tabel Referensi<span class="fa arrow"></span></a>
       <ul class="nav nav-second-level">
         <li><a href="#">Data Jenis Buku</a></li>
         <li><a href="#">Data Bahasa Buku</a></li>
         <li><a href="#">Data Link</a></li>
       </ul>
-      </li>
+      </li> -->
 
       <!-- Menu User  -->
       <li>

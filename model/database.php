@@ -5,6 +5,7 @@
 	$pass ="";
 	$database = "elibrary";
 	$connect = new mysqli($host, $user, $pass,$database) or die("Error : ".mysql_error());
+	// $connect = mysqli_connect($host, $user, $pass,$database) or die("Error : ".mysql_error());
 
 	//access key to access API
 	$access_key = "12345";

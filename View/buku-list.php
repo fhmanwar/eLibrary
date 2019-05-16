@@ -44,15 +44,23 @@
 
 	// get all data from menu table and category table
 	if(empty($keyword)){
-		$sql_query = "SELECT Menu_ID, Menu_name, Category_name, Price, Serve_for, Menu_image, Quantity
-				FROM tbl_menu m, tbl_category c
-				WHERE m.Category_ID = c.Category_ID
-				ORDER BY m.Menu_ID DESC";
+		// $sql_query = "SELECT Menu_ID, Menu_name, Category_name, Price, Serve_for, Menu_image, Quantity
+		// 		FROM tbl_menu m, tbl_category c
+		// 		WHERE m.Category_ID = c.Category_ID
+		// 		ORDER BY m.Menu_ID DESC";
+		$sql_query = "SELECT id_buku, judul_buku, nama_jenis, penulis_buku, subjek_buku, Serve_for, kode_buku, penerbit, tahun_terbit, no_seri, status_buku, ringkasan, cover_buku, jumlah_buku, tanggal_entri
+				FROM buku b, jenis j
+				WHERE b.id_jenis = j.id_jenis
+				ORDER BY b.id_buku DESC";
 	}else{
-		$sql_query = "SELECT Menu_ID, Menu_name, Category_name, Price, Serve_for, Menu_image, Quantity
-				FROM tbl_menu m, tbl_category c
-				WHERE m.Category_ID = c.Category_ID AND Menu_name LIKE ?
-				ORDER BY m.Menu_ID DESC";
+		// $sql_query = "SELECT Menu_ID, Menu_name, Category_name, Price, Serve_for, Menu_image, Quantity
+		// 		FROM tbl_menu m, tbl_category c
+		// 		WHERE m.Category_ID = c.Category_ID AND Menu_name LIKE ?
+		// 		ORDER BY m.Menu_ID DESC";
+		$sql_query = "SELECT id_buku, judul_buku, nama_jenis, penulis_buku, subjek_buku, Serve_for, kode_buku, penerbit, tahun_terbit, no_seri, status_buku, ringkasan, cover_buku, jumlah_buku, tanggal_entri
+				FROM buku b, jenis j
+				WHERE b.id_jenis = j.id_jenis AND Menu_name LIKE ?
+				ORDER BY b.id_buku DESC";
 	}
 
 	$stmt = $connect->stmt_init();
@@ -65,83 +73,99 @@
 		$stmt->execute();
 		// store result
 		$stmt->store_result();
-		$stmt->bind_result($data['Menu_ID'],
-				$data['Menu_name'],
-				$data['Category_name'],
-				$data['Price'],
+		// $stmt->bind_result($data['Menu_ID'],
+		// 		$data['Menu_name'],
+		// 		$data['Category_name'],
+		// 		$data['Price'],
+		// 		$data['Serve_for'],
+		// 		$data['Menu_image'],
+		// 		$data['Quantity']
+		// 		);
+		$stmt->bind_result($data['id_buku'],
+				$data['judul_buku'],
+				$data['nama_jenis'],
+				$data['penulis_buku'],
+				$data['subjek_buku'],
 				$data['Serve_for'],
-				$data['Menu_image'],
-				$data['Quantity']
+				$data['kode_buku'],
+				$data['penerbit'],
+				$data['tahun_terbit'],
+				$data['no_seri'],
+				$data['status_buku'],
+				$data['ringkasan'],
+				$data['cover_buku'],
+				$data['jumlah_buku'],
+				$data['tanggal_entri']
 				);
 
 		// get total records
 		$total_records = $stmt->num_rows;
 	}
 
-	// check page parameter
-	if(isset($_GET['page'])){
-		$page = $_GET['page'];
-	}else{
-		$page = 1;
-	}
-
-	// number of data that will be display per page
-	$offset = 10;
-
-	//lets calculate the LIMIT for SQL, and save it $from
-	if ($page){
-		$from 	= ($page * $offset) - $offset;
-	}else{
-		//if nothing was given in page request, lets load the first page
-		$from = 0;
-	}
-
-	// get all data from reservation table
-	if(empty($keyword)){
-		$sql_query = "SELECT Menu_ID, Menu_name, Category_name, Price, Serve_for, Menu_image, Quantity
-				FROM tbl_menu m, tbl_category c
-				WHERE m.Category_ID = c.Category_ID
-				ORDER BY m.Menu_ID DESC LIMIT ?, ?";
-	}else{
-		$sql_query = "SELECT Menu_ID, Menu_name, Category_name, Price, Serve_for, Menu_image, Quantity
-				FROM tbl_menu m, tbl_category c
-				WHERE m.Category_ID = c.Category_ID AND Menu_name LIKE ?
-				ORDER BY m.Menu_ID DESC LIMIT ?, ?";
-	}
-
-	$stmt_paging = $connect->stmt_init();
-	if($stmt_paging ->prepare($sql_query)) {
-		// Bind your variables to replace the ?s
-		if(empty($keyword)){
-			$stmt_paging ->bind_param('ss', $from, $offset);
-		}else{
-			$stmt_paging ->bind_param('sss', $bind_keyword, $from, $offset);
-		}
-		// Execute query
-		$stmt_paging ->execute();
-		// store result
-		$stmt_paging ->store_result();
-
-		$stmt_paging->bind_result($data['Menu_ID'],
-				$data['Menu_name'],
-				$data['Category_name'],
-				$data['Price'],
-				$data['Serve_for'],
-				$data['Menu_image'],
-				$data['Quantity']
-				);
-
-		// for paging purpose
-		$total_records_paging = $total_records;
-	}
+	// // check page parameter
+	// if(isset($_GET['page'])){
+	// 	$page = $_GET['page'];
+	// }else{
+	// 	$page = 1;
+	// }
+	//
+	// // number of data that will be display per page
+	// $offset = 10;
+	//
+	// //lets calculate the LIMIT for SQL, and save it $from
+	// if ($page){
+	// 	$from 	= ($page * $offset) - $offset;
+	// }else{
+	// 	//if nothing was given in page request, lets load the first page
+	// 	$from = 0;
+	// }
+	//
+	// // get all data from reservation table
+	// if(empty($keyword)){
+	// 	$sql_query = "SELECT Menu_ID, Menu_name, Category_name, Price, Serve_for, Menu_image, Quantity
+	// 			FROM tbl_menu m, tbl_category c
+	// 			WHERE m.Category_ID = c.Category_ID
+	// 			ORDER BY m.Menu_ID DESC LIMIT ?, ?";
+	// }else{
+	// 	$sql_query = "SELECT Menu_ID, Menu_name, Category_name, Price, Serve_for, Menu_image, Quantity
+	// 			FROM tbl_menu m, tbl_category c
+	// 			WHERE m.Category_ID = c.Category_ID AND Menu_name LIKE ?
+	// 			ORDER BY m.Menu_ID DESC LIMIT ?, ?";
+	// }
+	//
+	// $stmt_paging = $connect->stmt_init();
+	// if($stmt_paging ->prepare($sql_query)) {
+	// 	// Bind your variables to replace the ?s
+	// 	if(empty($keyword)){
+	// 		$stmt_paging ->bind_param('ss', $from, $offset);
+	// 	}else{
+	// 		$stmt_paging ->bind_param('sss', $bind_keyword, $from, $offset);
+	// 	}
+	// 	// Execute query
+	// 	$stmt_paging ->execute();
+	// 	// store result
+	// 	$stmt_paging ->store_result();
+	//
+	// 	$stmt_paging->bind_result($data['Menu_ID'],
+	// 			$data['Menu_name'],
+	// 			$data['Category_name'],
+	// 			$data['Price'],
+	// 			$data['Serve_for'],
+	// 			$data['Menu_image'],
+	// 			$data['Quantity']
+	// 			);
+	//
+	// 	// for paging purpose
+	// 	$total_records_paging = $total_records;
+	// }
 
 	// if no data on database show "No Reservation is Available"
-	if($total_records_paging == 0){
+	if($total_records == 0){
 
 ?>
 	<h1>Menu Not Available
-		<a href="add-menu.php">
-			<button class="btn btn-danger">Add New Menu</button>
+		<a href="buku-add.php">
+			<button class="btn btn-success">Add New Menu</button>
 		</a>
 	</h1>
 	<hr />
@@ -149,7 +173,7 @@
 	<?php
 		// otherwise, show data
 		}else{
-			$row_number = $from + 1;
+			// $row_number = $from + 1;
 	?>
 	<div class="col-md-12">
 		<h1>
@@ -182,44 +206,65 @@
 				<div class="panel-body">
 					<div class="table-responsive">
 						<p>
-							<a href="add-menu.php">
-								<button class="btn btn-danger">Add New Menu</button>
+							<a href="buku-add.php">
+								<button class="btn btn-success">Add New Menu</button>
 							</a>
 						</p>
 						<table class='table table-striped table-bordered table-hover' id="dataTables-example">
 							<thead>
 								<tr class="warning">
-									<th>Name</th>
-									<th>Image</th>
+									<th>Cover</th>
+									<th>Judul Buku</th>
+									<th>Penulis</th>
+									<th>Jenis</th>
 									<th>Status</th>
-									<th>Stock</th>
-									<th>Price</th>
-									<th>Category</th>
+									<th>File</th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php
+								// foreach($connect->query('SELECT f.id_buku,f.id_buku,b.id_buku
+								// 											FROM  file f
+								// 											LEFT JOIN buku b ON f.id_buku = b.id_buku
+								// 											WHERE id_buku=?') as $row) {
+
+								// }
+							$no=0;
+						  $result=mysqli_query($connect,"select f.id_buku,f.id_buku, f.judul_file, b.id_buku
+																  from buku f
+																  left join file b on b.id_buku = f.id_buku ");
+							 while($obj=mysqli_fetch_object($result)){
+							 		$no++;
+									echo $obj->judul_buku;
+							 };
+							 $e = mysqli_num_rows($result);
+							 echo $e;
 								// get all data using while loop
-								while ($stmt_paging->fetch()){ ?>
-									<tr class="odd gradeX">
-										<td><?php echo $data['Menu_name'];?></td>
+								while ($stmt->fetch()){
+
+								?>
+
+									<tr>
 										<td width="10%"><img src="<?php echo $data['Menu_image']; ?>" width="60" height="40"/></td>
-										<td><?php echo $data['Serve_for'];?></td>
-										<td><?php echo $data['Quantity'];?></td>
-										<td><?php echo $data['Price']." ".$currency;?></td>
-										<td width="15%"><?php echo $data['Category_name'];?></td>
+										<td><?php echo $data['judul_buku'];?></td>
+										<td><?php echo $data['penulis_buku'];?></td>
+										<td><?php echo $data['nama_jenis'];?></td>
+										<td><?php echo $data['Serve_for'];?> - <?php echo $data['jumlah_buku'];?> books</td>
+										<td><?php echo $no;?> files</td>
+										<!-- <td><?php //echo $data['Price']." ".$currency;?></td> -->
+										<!-- <td width="15%"><?php //echo $data['Category_name'];?></td> -->
 										<td width="15%">
-											<a href="menu-detail.php?id=<?php echo $data['Menu_ID'];?>">
-												View
+											<a href="menu-detail.php?id=<?php echo $data['Menu_ID'];?>" class="btn btn-info">
+												<i class="fa fa-eye"></i>
 											</a>&nbsp;
 
-											<a href="edit-menu.php?id=<?php echo $data['Menu_ID'];?>">
-												Edit
+											<a href="edit-menu.php?id=<?php echo $data['Menu_ID'];?>" class="btn btn-warning">
+												<i class="fa fa-edit"></i>
 											</a>&nbsp;
 
-											<a href="delete-menu.php?id=<?php echo $data['Menu_ID'];?>">
-												Delete
+											<a href="delete-menu.php?id=<?php echo $data['Menu_ID'];?>" class="btn btn-danger">
+												<i class="fa fa-trash-o"></i>
 											</a>
 										</td>
 									</tr>
@@ -240,7 +285,7 @@
 	<h4>
 		<?php
 			// for pagination purpose
-			$function->doPages($offset, 'menu.php', '', $total_records, $keyword);
+			// $function->doPages($offset, 'menu.php', '', $total_records, $keyword);
 		?>
 	</h4>
 	</div>
