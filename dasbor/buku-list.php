@@ -152,13 +152,8 @@
 	<div class="col-md-12">
 		<h1>
 			Menu List
-			<a href="add-menu.php">
-				<button class="btn btn-danger">Add New Menu</button>
-			</a>
 			<hr/>
 		</h1>
-
-
 	</div>
 	<!-- search form -->
 	<form class="list_header" method="get">
@@ -175,45 +170,65 @@
 	</form>
 	<!-- end of search form -->
 	<br/>
-	<div class="col-md-12">
-	<div class="table-responsive">
-	<table class='table table-hover table-condensed table-bordered'>
-		<tr class="success">
-			<th>Name</th>
-			<th>Image</th>
-			<th>Status</th>
-			<th>Stock</th>
-			<th>Price</th>
-			<th>Category</th>
-			<th>Action</th>
-		</tr>
-	<?php
-		// get all data using while loop
-		while ($stmt_paging->fetch()){ ?>
-		<tr>
-			<td><?php echo $data['Menu_name'];?></td>
-			<td width="10%"><img src="<?php echo $data['Menu_image']; ?>" width="60" height="40"/></td>
-			<td><?php echo $data['Serve_for'];?></td>
-			<td><?php echo $data['Quantity'];?></td>
-			<td><?php echo $data['Price']." ".$currency;?></td>
-			<td width="15%"><?php echo $data['Category_name'];?></td>
-			<td width="15%">
-				<a href="menu-detail.php?id=<?php echo $data['Menu_ID'];?>">
-					View
-				</a>&nbsp;
+	<div class="row">
+		<div class="col-md-12">
+			<!-- Advanced Tables -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Advanced Tables
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<a href="add-menu.php">
+							<button class="btn btn-danger">Add New Menu</button>
+						</a>
+						<table class='table table-striped table-bordered table-hover' id="dataTables-example">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Image</th>
+									<th>Status</th>
+									<th>Stock</th>
+									<th>Price</th>
+									<th>Category</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								// get all data using while loop
+								while ($stmt_paging->fetch()){ ?>
+									<tr class="odd gradeX">
+										<td><?php echo $data['Menu_name'];?></td>
+										<td width="10%"><img src="<?php echo $data['Menu_image']; ?>" width="60" height="40"/></td>
+										<td><?php echo $data['Serve_for'];?></td>
+										<td><?php echo $data['Quantity'];?></td>
+										<td><?php echo $data['Price']." ".$currency;?></td>
+										<td width="15%"><?php echo $data['Category_name'];?></td>
+										<td width="15%">
+											<a href="menu-detail.php?id=<?php echo $data['Menu_ID'];?>">
+												View
+											</a>&nbsp;
 
-				<a href="edit-menu.php?id=<?php echo $data['Menu_ID'];?>">
-					Edit
-				</a>&nbsp;
+											<a href="edit-menu.php?id=<?php echo $data['Menu_ID'];?>">
+												Edit
+											</a>&nbsp;
 
-				<a href="delete-menu.php?id=<?php echo $data['Menu_ID'];?>">
-					Delete
-				</a>
-			</td>
-		</tr>
-	<?php } }?>
-	</table>
+											<a href="delete-menu.php?id=<?php echo $data['Menu_ID'];?>">
+												Delete
+											</a>
+										</td>
+									</tr>
+								<?php } }?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- end Advanced Tables -->
+		</div>
 	</div>
+	<!-- end Row -->
 	</div>
 
 	<div class="col-md-12">
@@ -226,7 +241,7 @@
 	</div>
 
 	<div class="separator"> </div>
-</div>
+<!-- </div> -->
 <?php
 	$stmt->close();
 	include_once('../model/close_database.php');
