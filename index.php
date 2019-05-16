@@ -112,7 +112,7 @@
 				if($num == 1){
 					$_SESSION['user'] = $username;
 					$_SESSION['timeout'] = $currentTime + $expired;
-					header("location: dasbor/dasbor.php");
+					header("location: View/dasbor.php");
 				}else{
 					$error['failed'] = "<span class='label label-danger'>Invalid Username or Password!</span>";
 				}

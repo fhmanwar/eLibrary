@@ -25,7 +25,7 @@ include('layout/head.php');
 include('layout/header.php');
 include('layout/nav.php');
 
-include_once('../model/connect.php');
+include_once('../Model/connect.php');
 include_once('../helper/functions.php');
 
 //Total order count

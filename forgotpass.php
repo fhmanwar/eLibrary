@@ -13,7 +13,7 @@
 
 
         <?php
-        	include_once('model/connect.php');
+        	include_once('Model/connect.php');
         	include('helper/functions.php');
 
         	if(isset($_POST['btnReset'])){
@@ -119,7 +119,7 @@
           </div>
         </div>
       </div>
-        <?php include_once('model/close_database.php'); ?>
+        <?php include_once('Model/close_database.php'); ?>
   	</div>
 
     <script src="assets/css/js/jquery.min.js"></script>

@@ -1,65 +1,65 @@
 <?php
-	include_once('includes/connect_database.php');  
-	include_once('functions.php'); 
+	include_once('Model/connect.php');
+	include_once('functions.php');
 ?>
 
 <div id="content" class="container col-md-12">
-	<?php 
+	<?php
 		if(isset($_POST['btnChange'])){
 			$tax = $_POST['tax'];
 			$currency = $_POST['currency'];
-			
+
 			// create array variable to handle error
 			$error = array();
-			
+
 			if(empty($tax)){
 				$tax = 0;
 			}else if(!is_numeric($tax)){
 				$error['tax'] = "*Tax should be in numeric.";
 			}
-				
+
 			if(empty($currency)){
 				$currency = "USD";
 			}else{
-				
+
 				// update currency symbol in setting table
 				$sql_query = "UPDATE tbl_setting
-						SET Value = ? 
+						SET Value = ?
 						WHERE Variable = 'Currency'";
-				
+
 				$stmt = $connect->stmt_init();
-				if($stmt->prepare($sql_query)) {	
+				if($stmt->prepare($sql_query)) {
 					// Bind your variables to replace the ?s
 					$stmt->bind_param('s', $currency);
 					// Execute query
 					$stmt->execute();
-					// store result 
+					// store result
 					$update_result = $stmt->store_result();
 					$stmt->close();
 				}
-				
+
 			}
-			
+
 			if(is_numeric($tax)){
-			
+
 				// update tax in setting table
-				$sql_query = "UPDATE tbl_setting 
-						SET Value = ? 
+				$sql_query = "UPDATE tbl_setting
+						SET Value = ?
 						WHERE Variable = 'Tax'";
-				
+
 				$stmt = $connect->stmt_init();
-				if($stmt->prepare($sql_query)) {	
+				if($stmt->prepare($sql_query)) {
 					// Bind your variables to replace the ?s
 					$stmt->bind_param('s', $tax);
 					// Execute query
 					$stmt->execute();
-					// store result 
+					// store result
 					$update_result = $stmt->store_result();
 					$stmt->close();
 				}
 			}
-			
-			
+
+
 				// check update result
 			if($update_result){
 				$error['update_setting'] = " <h4><div class='alert alert-success'>
@@ -69,49 +69,49 @@
 			}else{
 				$error['update_setting'] = "*Failed updating setting data";
 			}
-			
-			
-		}		
-		
+
+
+		}
+
 		// get previous tax from setting table
-		$sql_query = "SELECT Value 
-				FROM tbl_setting 
+		$sql_query = "SELECT Value
+				FROM tbl_setting
 				WHERE Variable = 'Tax'";
-		
+
 		$stmt = $connect->stmt_init();
-		if($stmt->prepare($sql_query)) {	
+		if($stmt->prepare($sql_query)) {
 			// Execute query
 			$stmt->execute();
-			// store result 
+			// store result
 			$stmt->store_result();
 			$stmt->bind_result($previous_tax);
 			$stmt->fetch();
 			$stmt->close();
-		}	
-		
+		}
+
 		// get previous currency symbol from setting table
-		$sql_query = "SELECT Value 
-				FROM tbl_setting 
+		$sql_query = "SELECT Value
+				FROM tbl_setting
 				WHERE Variable = 'Currency'";
-		
+
 		$stmt = $connect->stmt_init();
-		if($stmt->prepare($sql_query)) {	
+		if($stmt->prepare($sql_query)) {
 			// Execute query
 			$stmt->execute();
-			// store result 
+			// store result
 			$stmt->store_result();
 			$stmt->bind_result($previous_currency);
 			$stmt->fetch();
 			$stmt->close();
-		}	
-		
+		}
+
 	?>
 
 	<div class="col-md-12">
 		<h1>Setting</h1>
 		<?php echo isset($error['update_setting']) ? $error['update_setting'] : '';?>
 		<hr/>
-	</div>	
+	</div>
 
 	<div class="col-md-5">
 		<form method="post">
@@ -120,7 +120,7 @@
 			<br/>
 			<label>Currency :</label>
 			<select name="currency" class="form-control">
-			<?php 
+			<?php
 				$function = new functions;
 				$arr_currency = $function->currency_info;
 				$size = count($arr_currency);
@@ -133,11 +133,11 @@
 			</select>
 			<br />
 			<input type="submit" class="btn-primary btn" value="Update" name="btnChange"/>
-			
+
 		</form>
 	</div>
 
 	<div class="separator"> </div>
 </div>
-			
-<?php include_once('includes/close_database.php'); ?>
+
+<?php include_once('Model/close_database.php'); ?>
