@@ -2,7 +2,7 @@
   <div class="sidebar-collapse">
     <ul class="nav" id="main-menu">
       <li>
-        <a class="" href="../dasbor/dasbor.php"><i class="fa fa-dashboard"></i> Dashboard</a>
+        <a class="" href="./dasbor.php"><i class="fa fa-dashboard"></i> Dashboard</a>
       </li>
 
       <li>
@@ -35,7 +35,7 @@
       <li>
       <a href="#"><i class="fa fa-book "></i>Katalog Buku <span class="fa arrow"></span></a>
       <ul class="nav nav-second-level">
-        <li><a href="#">Data Buku</a></li>
+        <li><a href="./buku-list.php">Data Buku</a></li>
         <li><a href="#">Tambah buku</a></li>
         <li><a href="#">Kelola File Buku (E-book)</a></li>
       </ul>

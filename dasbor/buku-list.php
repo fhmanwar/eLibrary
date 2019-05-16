@@ -1,6 +1,10 @@
 <?php
-	include_once('model/connect.php');
-	include_once('helper/functions.php');
+	include_once('layout/head.php');
+	include_once('layout/header.php');
+	include_once('layout/nav.php');
+
+	include_once('../model/connect.php');
+	include_once('../helper/functions.php');
 ?>
 
 <div id="content" class="container col-md-12">
@@ -225,4 +229,7 @@
 </div>
 <?php
 	$stmt->close();
-	include_once('model/close_database.php'); ?>
+	include_once('../model/close_database.php');
+	include_once('layout/footer.php');
+
+?>
