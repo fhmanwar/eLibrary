@@ -241,7 +241,6 @@
 	</div>
 
 	<div class="separator"> </div>
-<!-- </div> -->
 <?php
 	$stmt->close();
 	include_once('../model/close_database.php');
