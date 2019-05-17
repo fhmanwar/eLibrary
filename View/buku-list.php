@@ -1,4 +1,25 @@
 <?php
+// start session
+session_start();
+
+// set time for session timeout
+$currentTime = time() + 25200;
+$expired = 3600;
+
+// if session not set go to login page
+if(!isset($_SESSION['user'])){
+  header("location:../index.php");
+}
+
+// if current time is more than session timeout back to login page
+if($currentTime > $_SESSION['timeout']){
+  session_destroy();
+  header("location:../index.php");
+}
+
+// destroy previous session timeout and create new one
+unset($_SESSION['timeout']);
+$_SESSION['timeout'] = $currentTime + $expired;
 	include_once('layout/head.php');
 	include_once('layout/header.php');
 	include_once('layout/nav.php');
@@ -224,22 +245,17 @@
 							</thead>
 							<tbody>
 								<?php
-								// foreach($connect->query('SELECT f.id_buku,f.id_buku,b.id_buku
-								// 											FROM  file f
-								// 											LEFT JOIN buku b ON f.id_buku = b.id_buku
-								// 											WHERE id_buku=?') as $row) {
-
-								// }
 							$no=0;
-						  $result=mysqli_query($connect,"select f.id_buku,f.id_buku, f.judul_file, b.id_buku
-																  from buku f
-																  left join file b on b.id_buku = f.id_buku ");
+						  $result=mysqli_query($connect,"select f.id_buku, f.judul_file, b.id_buku, b.judul_buku
+																  from file f
+																  left join buku b on f.id_buku = b.id_buku ");
 							 while($obj=mysqli_fetch_object($result)){
 							 		$no++;
-									echo $obj->judul_buku;
+									$x = $obj->judul_buku;
 							 };
 							 $e = mysqli_num_rows($result);
-							 echo $e;
+							 // echo $x;
+
 								// get all data using while loop
 								while ($stmt->fetch()){
 
@@ -251,7 +267,7 @@
 										<td><?php echo $data['penulis_buku'];?></td>
 										<td><?php echo $data['nama_jenis'];?></td>
 										<td><?php echo $data['Serve_for'];?> - <?php echo $data['jumlah_buku'];?> books</td>
-										<td><?php echo $no;?> files</td>
+										<td><?php if($x == $data['judul_buku']){echo $no;}else{echo 0;}?> files</td>
 										<!-- <td><?php //echo $data['Price']." ".$currency;?></td> -->
 										<!-- <td width="15%"><?php //echo $data['Category_name'];?></td> -->
 										<td width="15%">

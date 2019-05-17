@@ -36,7 +36,7 @@
       <a href="#"><i class="fa fa-book "></i>Katalog Buku <span class="fa arrow"></span></a>
       <ul class="nav nav-second-level">
         <li><a href="./buku-list.php">Data Buku</a></li>
-        <li><a href="#">Tambah buku</a></li>
+        <li><a href="./buku-add.php">Tambah buku</a></li>
         <li><a href="#">Data Jenis Buku</a></li>
         <li><a href="#">Kelola File Buku (E-book)</a></li>
       </ul>
