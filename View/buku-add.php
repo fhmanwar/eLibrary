@@ -58,11 +58,9 @@ include_once('../helper/functions.php');
 			$kode_buku = $_POST['kode_buku'];
 			$penerbit = $_POST['penerbit'];
 			$tahun_terbit = $_POST['tahun_terbit'];
-			$no_seri = $_POST['no_seri'];
 			$status_buku = $_POST['status_buku'];
 			$ringkasan = $_POST['ringkasan'];
 			$jumlah_buku = $_POST['jumlah_buku'];
-			$tanggal_entri = $_POST['tanggal_entri'];
 
 			// get image info
 			$cover_buku = $_FILES['cover_buku']['name'];
@@ -138,8 +136,8 @@ include_once('../helper/functions.php');
 				$upload = move_uploaded_file($_FILES['cover_buku']['tmp_name'], 'aseets/upload/'.$cover_buku);
 
 				// insert new data to menu table
-				$sql_query = "INSERT INTO buku (id_jenis, judul_buku, penulis_buku, subjek_buku, Serve_for, kode_buku, penerbit, tahun_terbit, no_seri, status_buku, ringkasan, cover_buku, jumlah_buku, tanggal_entri)
-						VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				$sql_query = "INSERT INTO buku (id_jenis, judul_buku, penulis_buku, subjek_buku, Serve_for, kode_buku, penerbit, tahun_terbit, status_buku, ringkasan, cover_buku, jumlah_buku)
+						VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 				$upload_image = 'aseets/upload/'.$cover_buku;
 				$stmt = $connect->stmt_init();
@@ -154,12 +152,10 @@ include_once('../helper/functions.php');
 								$kode_buku,
 								$penerbit,
 								$tahun_terbit,
-								$no_seri,
 								$status_buku,
 								$ringkasan,
 								$upload_image,
-								$jumlah_buku,
-								$tanggal_entri
+								$jumlah_buku
 								);
 					// Execute query
 					$stmt->execute();
@@ -178,69 +174,100 @@ include_once('../helper/functions.php');
 			}
 	?>
 	<div class="col-md-12">
-	<h1>Add Menu <?php echo isset($error['add_menu']) ? $error['add_menu'] : '';?></h1>
-	<hr />
+		<h1>Add Menu <?php echo isset($error['add_menu']) ? $error['add_menu'] : '';?></h1>
+		<hr />
 	</div>
 
-	<div class="col-md-12">
 
+<div class="col-md-12">
 	<form method="post" enctype="multipart/form-data">
-
-	<div class="col-md-9">
 		<div class="col-md-12">
-		<label>Menu Name :</label><?php echo isset($error['judul_buku']) ? $error['judul_buku'] : '';?>
-		<input type="text" class="form-control" name="judul_buku"/>
+			<div class="form-group form-group-lg">
+				<label>Judul Buku</label><?php echo isset($error['judul_buku']) ? $error['judul_buku'] : '';?>
+				<input type="text" name="judul_buku" class="form-control" placeholder="Judul Buku" required>
+			</div>
 		</div>
-	    <div class="col-md-3">
-		    <br>
-		    <label>Price (<?php echo $currency;?>) :</label><?php echo isset($error['price']) ? $error['price']:'';?>
-				<input type="text" class="form-control" name="price"/>
-				<br/>
-
-				<label>Stock :</label><?php echo isset($error['quantity']) ? $error['quantity']:'';?>
-				<input type="text" class="form-control" name="quantity"/>
-				<br/>
-
-			    <label>Status :</label><?php echo isset($error['serve_for']) ? $error['serve_for'] : '';?>
-				<select name="serve_for" class="form-control">
-					<option>Available</option>
-					<option>Sold Out</option>
-				</select>
-				<br/>
-
-			    <label>Category :</label><?php echo isset($error['category_ID']) ? $error['category_ID'] : '';?>
-				<select name="category_ID" class="form-control">
-					<?php while($stmt_category->fetch()){ ?>
-						<option value="<?php echo $category_data['Category_ID']; ?>"><?php echo $category_data['Category_name']; ?></option>
-					<?php } ?>
-				</select>
-
-				<br/>
-				<label>Image :</label><?php echo isset($error['menu_image']) ? $error['menu_image'] : '';?>
-				<input type="file" name="menu_image" id="menu_image"/>
+		<div class="col-md-4">
+			<div class="form-group form-group-lg">
+				<label>Penulis/Pengarang Buku</label><?php echo isset($error['penulis_buku']) ? $error['penulis_buku'] : '';?>
+				<input type="text" name="penulis_buku" class="form-control" placeholder="Penulis Buku" required>
 			</div>
 
-		<div class="col-md-9">
-		<br>
-		<label>Description :</label><?php echo isset($error['description']) ? $error['description'] : '';?>
-		<textarea name="description" id="description" class="form-control editor" rows="16"></textarea>
-		<!-- <script type="text/javascript" src="css/js/ckeditor/ckeditor.js"></script>
-		<script type="text/javascript">
-        CKEDITOR.replace( 'description' );
-    </script> -->
-		</div>
-	</div>
+			<div class="form-group form-group-lg">
+				<label>Kode Buku</label><?php echo isset($error['kode_buku']) ? $error['kode_buku'] : '';?>
+				<input type="text" name="kode_buku" class="form-control" placeholder="Kode Buku" >
+			</div>
 
-	<br/>
-	<div class="col-md-3">
-		<div class="panel panel-default">
-			<div class="panel-heading">Add</div>
-				<div class="panel-body">
-					<input type="submit" class="btn-primary btn" value="Add" name="submit" />&nbsp;
-					<input type="reset" class="btn-danger btn" value="Clear"/>
-				</div>
+			<div class="form-group form-group-lg">
+				<label>Jenis Buku</label><?php echo isset($error['id_jenis']) ? $error['id_jenis'] : '';?>
+				<select name="id_jenis" class="form-control">
+					<?php while($stmt_category->fetch()){ ?>
+						<option value="<?php echo $category_data['id_jenis']; ?>"><?php echo $category_data['nama_jenis']; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+
+			<div class="form-group form-group-lg">
+				<label>Serve For</label><?php echo isset($error['serve_for']) ? $error['serve_for'] : '';?>
+				<select name="serve_for" class="form-control">
+					<option value="Available">Available</option>
+					<option value="Sold_Out">Sold Out</option>
+				</select>
+			</div>
 		</div>
-	</div>
+		<div class="col-md-4">
+
+			<div class="form-group form-group-lg">
+				<label>Subjek Buku</label><?php echo isset($error['subjek_buku']) ? $error['subjek_buku'] : '';?>
+				<input type="text" name="subjek_buku" class="form-control" placeholder="Subjek Buku" >
+			</div>
+
+			<div class="form-group form-group-lg">
+				<label>Penerbit Buku</label><?php echo isset($error['penerbit']) ? $error['penerbit'] : '';?>
+				<input type="text" name="penerbit" class="form-control" placeholder="Penerbit Buku">
+			</div>
+
+			<div class="form-group form-group-lg">
+				<label>Tahun Terbit</label><?php echo isset($error['tahun_terbit']) ? $error['tahun_terbit'] : '';?>
+				<input type="number" name="tahun_terbit" class="form-control" placeholder="Tahun Terbit" >
+			</div>
+
+			<div class="form-group form-group-lg">
+				<label>Jumlah Buku</label><?php echo isset($error['jumlah_buku']) ? $error['jumlah_buku'] : '';?>
+				<input type="number" name="jumlah_buku" class="form-control" placeholder="Jumlah Buku">
+			</div>
+
+		</div>
+
+		<div class="col-md-4">
+			<div class="form-group form-group-lg">
+				<label>Uploud Cover Buku</label><?php echo isset($error['cover_buku']) ? $error['cover_buku'] : '';?>
+				<input type="file" name="cover_buku" id="menu_image" class="form-control" placeholder="Uploud Cover Buku">
+			</div>
+
+			<div class="form-group form-group-lg">
+				<label>status Buku </label><?php echo isset($error['status_buku']) ? $error['status_buku'] : '';?>
+				<select name="status_buku" class="form-control">
+					<option value="Publish">Publish</option>
+					<option value="Not_Publish">Not Publish</option>
+					<option value="Missing">Missing</option>
+				</select>
+			</div>
+
+			<div class="form-group form-group-lg">
+				<label>Description</label></label><?php echo isset($error['ringkasan']) ? $error['ringkasan'] : '';?>
+				<textarea name="ringkasan" class="form-control editor" rows="16" placeholder="Ringkasan"></textarea>
+			</div>
+
+		</div>
+
+		<div class="col-md-12 text-center">
+			<div class="form-group form-group-lg">
+				<input type="submit" name="Submit" class="btn btn-primary btn-lg" value="Save Data">
+				<input type="reset" class="btn btn-default btn-lg" value="Reset">
+			</div>
+		</div>
+
 	</form>
 	</div>
 	<div class="separator"> </div>

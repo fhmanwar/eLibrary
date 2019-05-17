@@ -69,7 +69,7 @@ $_SESSION['timeout'] = $currentTime + $expired;
 		// 		FROM tbl_menu m, tbl_category c
 		// 		WHERE m.Category_ID = c.Category_ID
 		// 		ORDER BY m.Menu_ID DESC";
-		$sql_query = "SELECT id_buku, judul_buku, nama_jenis, penulis_buku, subjek_buku, Serve_for, kode_buku, penerbit, tahun_terbit, no_seri, status_buku, ringkasan, cover_buku, jumlah_buku, tanggal_entri
+		$sql_query = "SELECT id_buku, judul_buku, nama_jenis, penulis_buku, subjek_buku, Serve_for, kode_buku, penerbit, tahun_terbit, status_buku, ringkasan, cover_buku, jumlah_buku
 				FROM buku b, jenis j
 				WHERE b.id_jenis = j.id_jenis
 				ORDER BY b.id_buku DESC";
@@ -78,7 +78,7 @@ $_SESSION['timeout'] = $currentTime + $expired;
 		// 		FROM tbl_menu m, tbl_category c
 		// 		WHERE m.Category_ID = c.Category_ID AND Menu_name LIKE ?
 		// 		ORDER BY m.Menu_ID DESC";
-		$sql_query = "SELECT id_buku, judul_buku, nama_jenis, penulis_buku, subjek_buku, Serve_for, kode_buku, penerbit, tahun_terbit, no_seri, status_buku, ringkasan, cover_buku, jumlah_buku, tanggal_entri
+		$sql_query = "SELECT id_buku, judul_buku, nama_jenis, penulis_buku, subjek_buku, Serve_for, kode_buku, penerbit, tahun_terbit, status_buku, ringkasan, cover_buku, jumlah_buku
 				FROM buku b, jenis j
 				WHERE b.id_jenis = j.id_jenis AND Menu_name LIKE ?
 				ORDER BY b.id_buku DESC";
@@ -111,12 +111,10 @@ $_SESSION['timeout'] = $currentTime + $expired;
 				$data['kode_buku'],
 				$data['penerbit'],
 				$data['tahun_terbit'],
-				$data['no_seri'],
 				$data['status_buku'],
 				$data['ringkasan'],
 				$data['cover_buku'],
-				$data['jumlah_buku'],
-				$data['tanggal_entri']
+        $data['jumlah_buku']
 				);
 
 		// get total records
@@ -262,7 +260,7 @@ $_SESSION['timeout'] = $currentTime + $expired;
 								?>
 
 									<tr>
-										<td width="10%"><img src="<?php echo $data['Menu_image']; ?>" width="60" height="40"/></td>
+										<td width="10%"><img src="<?php echo $data['cover_buku']; ?>" width="60" height="40"/></td>
 										<td><?php echo $data['judul_buku'];?></td>
 										<td><?php echo $data['penulis_buku'];?></td>
 										<td><?php echo $data['nama_jenis'];?></td>
@@ -271,15 +269,16 @@ $_SESSION['timeout'] = $currentTime + $expired;
 										<!-- <td><?php //echo $data['Price']." ".$currency;?></td> -->
 										<!-- <td width="15%"><?php //echo $data['Category_name'];?></td> -->
 										<td width="15%">
-											<a href="menu-detail.php?id=<?php echo $data['Menu_ID'];?>" class="btn btn-info">
+                      <?php include('buku-detail.php');?>
+											<!-- <a href="menu-detail.php?id=<?php //echo $data['id_buku'];?>" class="btn btn-info">
 												<i class="fa fa-eye"></i>
-											</a>&nbsp;
+											</a>&nbsp; -->
 
-											<a href="edit-menu.php?id=<?php echo $data['Menu_ID'];?>" class="btn btn-warning">
+											<a href="edit-menu.php?id=<?php echo $data['id_buku'];?>" class="btn btn-warning">
 												<i class="fa fa-edit"></i>
 											</a>&nbsp;
 
-											<a href="delete-menu.php?id=<?php echo $data['Menu_ID'];?>" class="btn btn-danger">
+											<a href="delete-menu.php?id=<?php echo $data['id_buku'];?>" class="btn btn-danger">
 												<i class="fa fa-trash-o"></i>
 											</a>
 										</td>
