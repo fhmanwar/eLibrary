@@ -1,12 +1,11 @@
 <?php
-include_once('layout/head.php');
-include_once('layout/header.php');
-include_once('layout/nav.php');
+include('layout/head.php');
+include('layout/header.php');
+include('layout/nav.php');
 
-include_once('../model/connect.php');
-include_once('../helper/functions.php');
+include('../model/connect.php');
+include('../helper/functions.php');
 ?>
-<div id="content" class="container col-md-12">
 	<?php
 		// get currency symbol from setting table
 		$sql_query = "SELECT Value
@@ -54,7 +53,7 @@ include_once('../helper/functions.php');
 			$judul_buku = $_POST['judul_buku'];
 			$penulis_buku = $_POST['penulis_buku'];
 			$subjek_buku = $_POST['subjek_buku'];
-			$serve_for = $_POST['Serve_for'];
+			$serve_for = $_POST['serve_for'];
 			$kode_buku = $_POST['kode_buku'];
 			$penerbit = $_POST['penerbit'];
 			$tahun_terbit = $_POST['tahun_terbit'];
@@ -81,6 +80,9 @@ include_once('../helper/functions.php');
 			if(empty($penulis_buku)){
 				$error['penulis_buku'] = " <span class='label label-danger'>Required!</span>";
 			}
+			if(empty($serve_for)){
+				$error['serve_for'] = " <span class='label label-danger'>Not choosen</span>";
+			}
 
 			// if(empty($price)){
 			// 	$error['price'] = " <span class='label label-danger'>Required!</span>";
@@ -93,10 +95,6 @@ include_once('../helper/functions.php');
 			// }else if(!is_numeric($quantity)){
 			// 	$error['quantity'] = " <span class='label label-danger'>Quantity in number!</span>";
 			// }
-
-			if(empty($serve_for)){
-				$error['serve_for'] = " <span class='label label-danger'>Not choosen</span>";
-			}
 			//
 			// if(empty($description)){
 			// 	$error['description'] = " <span class='label label-danger'>Required!</span>";
@@ -133,17 +131,17 @@ include_once('../helper/functions.php');
 				$cover_buku = $function->get_random_string($string, 4)."-".date("Y-m-d").".".$extension;
 
 				// upload new image
-				$upload = move_uploaded_file($_FILES['cover_buku']['tmp_name'], 'aseets/upload/'.$cover_buku);
+				$upload = move_uploaded_file($_FILES['cover_buku']['tmp_name'], 'upload/img/'.$cover_buku);
 
 				// insert new data to menu table
-				$sql_query = "INSERT INTO buku (id_jenis, judul_buku, penulis_buku, subjek_buku, Serve_for, kode_buku, penerbit, tahun_terbit, status_buku, ringkasan, cover_buku, jumlah_buku)
+				$sql_query = "INSERT INTO buku (id_jenis, judul_buku, penulis_buku, subjek_buku, serve_for, kode_buku, penerbit, tahun_terbit, status_buku, ringkasan, cover_buku, jumlah_buku)
 						VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 				$upload_image = 'upload/img'.$cover_buku;
 				$stmt = $connect->stmt_init();
 				if($stmt->prepare($sql_query)) {
 					// Bind your variables to replace the ?s
-					$stmt->bind_param('sssssssssssss',
+					$stmt->bind_param('ssssssssssss',
 								$id_jenis,
 								$judul_buku,
 								$penulis_buku,
@@ -193,7 +191,7 @@ include_once('../helper/functions.php');
 			</div>
 
 			<div class="form-group form-group-lg">
-				<label>Kode Buku</label><?php echo isset($error['kode_buku']) ? $error['kode_buku'] : '';?>
+				<label>Kode Buku</label><?php //echo isset($error['kode_buku']) ? $error['kode_buku'] : '';?>
 				<input type="text" name="kode_buku" class="form-control" placeholder="Kode Buku" >
 			</div>
 
@@ -202,13 +200,13 @@ include_once('../helper/functions.php');
 				<select name="id_jenis" class="form-control">
 					<?php while($stmt_category->fetch()){ ?>
 						<option value="<?php echo $category_data['id_jenis']; ?>"><?php echo $category_data['nama_jenis']; ?></option>
-					<?php } $stmt_category->close(); ?>
+					<?php } ?>
 				</select>
 			</div>
 
 			<div class="form-group form-group-lg">
-				<label>Serve For</label><?php //echo isset($error['serve_for']) ? $error['serve_for'] : '';?>
-				<select name="Serve_for" class="form-control">
+				<label>Serve For</label><?php echo isset($error['serve_for']) ? $error['serve_for'] : '';?>
+				<select name="serve_for" class="form-control">
 					<option value="Available">Available</option>
 					<option value="Sold_Out">Sold Out</option>
 				</select>
@@ -240,8 +238,8 @@ include_once('../helper/functions.php');
 
 		<div class="col-md-4">
 			<div class="form-group form-group-lg">
-				<label>Uploud Cover Buku</label><?php// echo isset($error['cover_buku']) ? $error['cover_buku'] : '';?>
-				<input type="file" name="cover_buku" id="menu_image" class="form-control" placeholder="Uploud Cover Buku">
+				<label>Uploud Cover Buku</label><?php echo isset($error['cover_buku']) ? $error['cover_buku'] : '';?>
+				<input type="file" name="cover_buku" id="cover_buku" class="form-control" placeholder="Uploud Cover Buku">
 			</div>
 
 			<div class="form-group form-group-lg">
@@ -270,11 +268,10 @@ include_once('../helper/functions.php');
 	</form>
 	</div>
 	<div class="separator"> </div>
-</div>
 
 
 <?php
 	$stmt_category->close();
-  include_once('../model/close_database.php');
-	include_once('layout/footer.php');
+  include('../model/close_database.php');
+	include('layout/footer.php');
 ?>
