@@ -130,20 +130,20 @@ include_once('../helper/functions.php');
 				$string = '0123456789';
 				$file = preg_replace("/\s+/", "_", $_FILES['cover_buku']['name']);
 				$function = new functions;
-				$menu_image = $function->get_random_string($string, 4)."-".date("Y-m-d").".".$extension;
+				$cover_buku = $function->get_random_string($string, 4)."-".date("Y-m-d").".".$extension;
 
 				// upload new image
 				$upload = move_uploaded_file($_FILES['cover_buku']['tmp_name'], 'aseets/upload/'.$cover_buku);
 
 				// insert new data to menu table
 				$sql_query = "INSERT INTO buku (id_jenis, judul_buku, penulis_buku, subjek_buku, Serve_for, kode_buku, penerbit, tahun_terbit, status_buku, ringkasan, cover_buku, jumlah_buku)
-						VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+						VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-				$upload_image = 'aseets/upload/'.$cover_buku;
+				$upload_image = 'upload/img'.$cover_buku;
 				$stmt = $connect->stmt_init();
 				if($stmt->prepare($sql_query)) {
 					// Bind your variables to replace the ?s
-					$stmt->bind_param('sssssss',
+					$stmt->bind_param('sssssssssssss',
 								$id_jenis,
 								$judul_buku,
 								$penulis_buku,
@@ -170,8 +170,7 @@ include_once('../helper/functions.php');
 					$error['add_menu'] = " <span class='label label-danger'>Failed</span>";
 				}
 			}
-
-			}
+		}
 	?>
 	<div class="col-md-12">
 		<h1>Add Menu <?php echo isset($error['add_menu']) ? $error['add_menu'] : '';?></h1>
@@ -203,13 +202,13 @@ include_once('../helper/functions.php');
 				<select name="id_jenis" class="form-control">
 					<?php while($stmt_category->fetch()){ ?>
 						<option value="<?php echo $category_data['id_jenis']; ?>"><?php echo $category_data['nama_jenis']; ?></option>
-					<?php } ?>
+					<?php } $stmt_category->close(); ?>
 				</select>
 			</div>
 
 			<div class="form-group form-group-lg">
-				<label>Serve For</label><?php echo isset($error['serve_for']) ? $error['serve_for'] : '';?>
-				<select name="serve_for" class="form-control">
+				<label>Serve For</label><?php //echo isset($error['serve_for']) ? $error['serve_for'] : '';?>
+				<select name="Serve_for" class="form-control">
 					<option value="Available">Available</option>
 					<option value="Sold_Out">Sold Out</option>
 				</select>
@@ -218,22 +217,22 @@ include_once('../helper/functions.php');
 		<div class="col-md-4">
 
 			<div class="form-group form-group-lg">
-				<label>Subjek Buku</label><?php echo isset($error['subjek_buku']) ? $error['subjek_buku'] : '';?>
+				<label>Subjek Buku</label><?php //echo isset($error['subjek_buku']) ? $error['subjek_buku'] : '';?>
 				<input type="text" name="subjek_buku" class="form-control" placeholder="Subjek Buku" >
 			</div>
 
 			<div class="form-group form-group-lg">
-				<label>Penerbit Buku</label><?php echo isset($error['penerbit']) ? $error['penerbit'] : '';?>
+				<label>Penerbit Buku</label><?php //echo isset($error['penerbit']) ? $error['penerbit'] : '';?>
 				<input type="text" name="penerbit" class="form-control" placeholder="Penerbit Buku">
 			</div>
 
 			<div class="form-group form-group-lg">
-				<label>Tahun Terbit</label><?php echo isset($error['tahun_terbit']) ? $error['tahun_terbit'] : '';?>
+				<label>Tahun Terbit</label><?php //echo isset($error['tahun_terbit']) ? $error['tahun_terbit'] : '';?>
 				<input type="number" name="tahun_terbit" class="form-control" placeholder="Tahun Terbit" >
 			</div>
 
 			<div class="form-group form-group-lg">
-				<label>Jumlah Buku</label><?php echo isset($error['jumlah_buku']) ? $error['jumlah_buku'] : '';?>
+				<label>Jumlah Buku</label><?php //echo isset($error['jumlah_buku']) ? $error['jumlah_buku'] : '';?>
 				<input type="number" name="jumlah_buku" class="form-control" placeholder="Jumlah Buku">
 			</div>
 
@@ -241,12 +240,12 @@ include_once('../helper/functions.php');
 
 		<div class="col-md-4">
 			<div class="form-group form-group-lg">
-				<label>Uploud Cover Buku</label><?php echo isset($error['cover_buku']) ? $error['cover_buku'] : '';?>
+				<label>Uploud Cover Buku</label><?php// echo isset($error['cover_buku']) ? $error['cover_buku'] : '';?>
 				<input type="file" name="cover_buku" id="menu_image" class="form-control" placeholder="Uploud Cover Buku">
 			</div>
 
 			<div class="form-group form-group-lg">
-				<label>status Buku </label><?php echo isset($error['status_buku']) ? $error['status_buku'] : '';?>
+				<label>status Buku </label><?php //echo isset($error['status_buku']) ? $error['status_buku'] : '';?>
 				<select name="status_buku" class="form-control">
 					<option value="Publish">Publish</option>
 					<option value="Not_Publish">Not Publish</option>
@@ -255,7 +254,7 @@ include_once('../helper/functions.php');
 			</div>
 
 			<div class="form-group form-group-lg">
-				<label>Description</label></label><?php echo isset($error['ringkasan']) ? $error['ringkasan'] : '';?>
+				<label>Description</label></label><?php //echo isset($error['ringkasan']) ? $error['ringkasan'] : '';?>
 				<textarea name="ringkasan" class="form-control editor" rows="16" placeholder="Ringkasan"></textarea>
 			</div>
 
@@ -263,7 +262,7 @@ include_once('../helper/functions.php');
 
 		<div class="col-md-12 text-center">
 			<div class="form-group form-group-lg">
-				<input type="submit" name="Submit" class="btn btn-primary btn-lg" value="Save Data">
+				<input type="submit" name="submit" class="btn btn-primary btn-lg" value="Save Data">
 				<input type="reset" class="btn btn-default btn-lg" value="Reset">
 			</div>
 		</div>

@@ -40,31 +40,29 @@ CREATE TABLE IF NOT EXISTS `buku` (
   `judul_buku` varchar(255) NOT NULL,
   `penulis_buku` varchar(255) NOT NULL,
   `subjek_buku` varchar(255) DEFAULT NULL,
-  `Serve_for` varchar(50) DEFAULT NULL,
+  `Serve_for` enum('Available','Sold Out') DEFAULT NULL,
   `kode_buku` varchar(50) DEFAULT NULL,
   `penerbit` varchar(255) DEFAULT NULL,
   `tahun_terbit` year(4) DEFAULT NULL,
-  `no_seri` varchar(50) DEFAULT NULL,
   `status_buku` enum('Publish','Not_Publish','Missing','') DEFAULT NULL,
   `ringkasan` mediumtext,
   `cover_buku` varchar(255) DEFAULT NULL,
   `jumlah_buku` int(11) DEFAULT NULL,
-  `tanggal_entri` datetime NOT NULL,
   `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_buku`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table elibrary.buku: ~8 rows (approximately)
 /*!40000 ALTER TABLE `buku` DISABLE KEYS */;
-INSERT INTO `buku` (`id_buku`, `id_jenis`, `judul_buku`, `penulis_buku`, `subjek_buku`, `Serve_for`, `kode_buku`, `penerbit`, `tahun_terbit`, `no_seri`, `status_buku`, `ringkasan`, `cover_buku`, `jumlah_buku`, `tanggal_entri`, `tanggal`) VALUES
-	(5, 3, 'Ilmu Pengetahuan Sosial', 'Nur Wahyu Rochmadi', 'Sekolah Menengah Kejuruan', 'Available', 'IPSJD1', 'Buku Sekolah Elektronik (BSE)', '2004', '123xr3', 'Publish', 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.\r\n\r\nA small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.', 'ips.jpg', 20, '2019-03-22 20:14:19', '2019-05-17 01:30:41'),
-	(6, 3, 'Dasar Kewirausahaan', 'Ir. Hendro', '', 'Available', '', '', '0000', '', 'Publish', '  ', '20170212035154.jpg', 0, '2019-03-23 14:33:09', '2019-05-17 01:30:43'),
-	(7, 3, 'PHP Modul', 'Teguh Wahyono', '', 'Available', '', '', '0000', '', 'Publish', '  ', '20170212145310.jpg', 0, '2019-03-25 18:10:31', '2019-05-17 01:30:44'),
-	(8, 3, 'Pengantar Teknologi Informasi', 'Eddy Sutanta', '', 'Available', '', '', '0000', '', 'Publish', '  ', '20170209044244.jpg', 0, '2019-03-25 18:11:29', '2019-05-17 01:30:44'),
-	(9, 3, 'Kamus Istilah Internet', 'wang cun', '', 'Available', '', '', '0000', '', 'Publish', '  ', '20170212080423.jpg', 0, '2019-03-25 18:12:13', '2019-05-17 01:30:46'),
-	(10, 3, 'Kamus Matematika', 'ario', '', 'Available', '', '', '0000', '', 'Publish', '  ', '20170207102926.jpg', 0, '2019-03-25 18:12:56', '2019-05-17 01:30:47'),
-	(11, 3, 'E-Learning', 'mario', '', 'Available', '', '', '0000', '', 'Publish', '  ', '20170209050821.jpg', 0, '2019-03-25 18:13:39', '2019-05-17 01:30:47'),
-	(12, 3, 'Algoritma C++', 'niawarti', '', 'Available', '', '', '0000', '', 'Publish', '  ', '20170209045014.jpg', 0, '2019-03-25 18:14:22', '2019-05-17 01:30:50');
+INSERT INTO `buku` (`id_buku`, `id_jenis`, `judul_buku`, `penulis_buku`, `subjek_buku`, `Serve_for`, `kode_buku`, `penerbit`, `tahun_terbit`, `status_buku`, `ringkasan`, `cover_buku`, `jumlah_buku`, `tanggal`) VALUES
+	(5, 3, 'Ilmu Pengetahuan Sosial', 'Nur Wahyu Rochmadi', 'Sekolah Menengah Kejuruan', 'Available', 'IPSJD1', 'Buku Sekolah Elektronik (BSE)', '2004', 'Publish', 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.\r\n\r\nA small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.', 'ips.jpg', 20, '2019-05-17 01:30:41'),
+	(6, 3, 'Dasar Kewirausahaan', 'Ir. Hendro', '', 'Available', '', '', '0000', 'Publish', '  ', '20170212035154.jpg', 6, '2019-05-17 20:52:18'),
+	(7, 3, 'PHP Modul', 'Teguh Wahyono', '', 'Available', '', '', '0000', 'Publish', '  ', '20170212145310.jpg', 5, '2019-05-17 20:52:21'),
+	(8, 3, 'Pengantar Teknologi Informasi', 'Eddy Sutanta', '', 'Available', '', '', '0000', 'Publish', '  ', '20170209044244.jpg', 34, '2019-05-17 20:52:26'),
+	(9, 3, 'Kamus Istilah Internet', 'wang cun', '', 'Available', '', '', '0000', 'Publish', '  ', '20170212080423.jpg', 34, '2019-05-17 20:52:31'),
+	(10, 3, 'Kamus Matematika', 'ario', '', 'Available', '', '', '0000', 'Publish', '  ', '20170207102926.jpg', 12, '2019-05-17 20:52:34'),
+	(11, 3, 'E-Learning', 'mario', '', 'Available', '', '', '0000', 'Publish', '  ', '20170209050821.jpg', 55, '2019-05-17 20:52:36'),
+	(12, 3, 'Algoritma C++', 'niawarti', '', 'Available', '', '', '0000', 'Publish', '  ', '20170209045014.jpg', 54, '2019-05-17 20:52:42');
 /*!40000 ALTER TABLE `buku` ENABLE KEYS */;
 
 -- Dumping structure for table elibrary.file

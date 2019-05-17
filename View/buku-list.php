@@ -270,16 +270,14 @@ $_SESSION['timeout'] = $currentTime + $expired;
 										<!-- <td width="15%"><?php //echo $data['Category_name'];?></td> -->
 										<td width="15%">
                       <?php include('buku-detail.php');?>
-											<!-- <a href="menu-detail.php?id=<?php //echo $data['id_buku'];?>" class="btn btn-info">
-												<i class="fa fa-eye"></i>
-											</a>&nbsp; -->
 
-											<a href="edit-menu.php?id=<?php echo $data['id_buku'];?>" class="btn btn-warning">
+											<a href="buku-edit.php?id=<?php echo $data['id_buku'];?>" class="btn btn-warning">
 												<i class="fa fa-edit"></i>
 											</a>&nbsp;
 
-											<a href="delete-menu.php?id=<?php echo $data['id_buku'];?>" class="btn btn-danger">
-												<i class="fa fa-trash-o"></i>
+											<!-- <a href="buku-delete.php?id=<?php echo $data['id_buku'];?>" class="btn btn-danger">
+												<i class="fa fa-trash-o"></i> -->
+                        <?php include('buku-delete.php');?>
 											</a>
 										</td>
 									</tr>
@@ -295,16 +293,6 @@ $_SESSION['timeout'] = $currentTime + $expired;
 	</div>
 	<!-- end Row -->
 	</div>
-
-	<div class="col-md-12">
-	<h4>
-		<?php
-			// for pagination purpose
-			// $function->doPages($offset, 'menu.php', '', $total_records, $keyword);
-		?>
-	</h4>
-	</div>
-
 	<div class="separator"> </div>
 <?php
 	$stmt->close();
