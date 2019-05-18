@@ -223,19 +223,19 @@ INSERT INTO `tbl_setting` (`Variable`, `Value`) VALUES
 
 -- Dumping structure for table elibrary.tbl_user
 CREATE TABLE IF NOT EXISTS `tbl_user` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_anggota` int(11) NOT NULL,
-  `Username` varchar(15) NOT NULL,
-  `Password` text NOT NULL,
-  `Email` varchar(100) NOT NULL,
+  `username` varchar(15) NOT NULL,
+  `password` text NOT NULL,
+  `email` varchar(100) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `akses_level` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table elibrary.tbl_user: 1 rows
 /*!40000 ALTER TABLE `tbl_user` DISABLE KEYS */;
-INSERT INTO `tbl_user` (`ID`, `id_anggota`, `Username`, `Password`, `Email`, `nama`, `akses_level`) VALUES
+INSERT INTO `tbl_user` (`id`, `id_anggota`, `username`, `password`, `email`, `nama`, `akses_level`) VALUES
 	(1, 0, 'admin', 'a74ac0a61316e8e74256de730cd32a78eac4653f10b485cbb452612367b61fcf', 'developer.solodroid@gmail.com', NULL, NULL);
 /*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
 

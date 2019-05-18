@@ -1,63 +1,10 @@
 <?php
-	ob_start();
-	session_start();
-?>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/custom1.css">
-  <title>ELibrary Admin Page</title>
-  <style>
-      .login{
-        margin-top: 12%;
-        margin-left: 2%;
-      }
-      .login h1{
-        padding-bottom: 40px;
-      }
-      body{
-        font-family: 'Open Sans', sans-serif;
-        background: #F9F9F9;
-      }
-  </style>
-</head>
-
-<body>
-  <div id="container">
-    <div id="login_content" class="col-md-11 login">
-      	<div class="col-md-4 col-md-offset-4">
-    	      <div class="panel panel-default">
-    			  <!-- Default panel contents -->
-    			  <div class="panel-heading">
-    				  <center><h3>Login Administrator</h3></center>
-    				  <center>( E-Library Android App )</center>
-    			  </div>
-    			  <div class="panel-body">
-    				<center><?php echo isset($error['failed']) ? $error['failed'] : '';?></center>
-    				<br>
-    		    <form method="post">
-              <label>Username :</label>
-              <input type="text" name="username" class="form-control" required>
-    					<br>
-              <label>Password :</label>
-              <input type="password" class="form-control" name="password" required>
-    					<br>
-    					<button type="submit" name="submit" class="btn btn-primary pull-right">Login</button><br><br>
-    		    </form>
-    				<a href="forgotpass.php"><p class="pull-right">Forgot Password?</p></a>
-    			  </div>
-    			</div>
-    	</div>
-    </div>
-  </div>
-
-  <script src="assets/js/bootstrap.min.js"></script>
-</body>
-</html>
-<?php
-	include_once('model/connect.php');
+ob_start();
+session_start();
+// include_once('model/connect.php');
+	include_once 'config/database.php';
+	$con = new Database();
+	$db = $con->getConnection();
 
 	// start session
 	//session_start();
@@ -120,5 +67,60 @@
 
 		}
 	}
-  include_once('model/close_database.php');
-	?>
+  // include_once('model/close_database.php');
+
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/custom1.css">
+  <title>ELibrary Admin Page</title>
+  <style>
+      .login{
+        margin-top: 12%;
+        margin-left: 2%;
+      }
+      .login h1{
+        padding-bottom: 40px;
+      }
+      body{
+        font-family: 'Open Sans', sans-serif;
+        background: #F9F9F9;
+      }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="login_content" class="col-md-11 login">
+      	<div class="col-md-4 col-md-offset-4">
+    	      <div class="panel panel-default">
+    			  <!-- Default panel contents -->
+    			  <div class="panel-heading">
+    				  <center><h3>Login Administrator</h3></center>
+    				  <center>( E-Library Android App )</center>
+    			  </div>
+    			  <div class="panel-body">
+	    				<center><?php //echo isset($error['failed']) ? $error['failed'] : '';?></center>
+	    				<br>
+	    		    <form method="post">
+	              <label>Username :</label>
+	              <input type="text" name="username" class="form-control" required>
+	    					<br>
+	              <label>Password :</label>
+	              <input type="password" class="form-control" name="password" required>
+	    					<br>
+	    					<button type="submit" name="submit" class="btn btn-primary pull-right">Login</button><br><br>
+	    		    </form>
+	    				<a href="forgotpass.php"><p class="pull-right">Forgot Password?</p></a>
+    			  </div>
+    			</div>
+    	</div>
+    </div>
+  </div>
+
+  <script src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>
