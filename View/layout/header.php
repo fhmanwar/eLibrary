@@ -6,13 +6,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../dasbor/dasbor.php">Binary admin</a>
+        <a class="navbar-brand" href="<?php echo $home_url; ?>view/index.php">E-Library</a>
       </div>
       <div style="color: white;
           padding: 15px 50px 5px 50px;
           float: right;
           font-size: 16px;"> Last access : 30 May 2014 &nbsp;
-          <a href="../logout.php" class="btn btn-danger square-btn-adjust">Logout</a>
+          <a href="<?php echo $home_url; ?>logout.php" class="btn btn-danger square-btn-adjust">Logout</a>
       </div>
     </nav>
     <!-- /. NAV TOP  -->

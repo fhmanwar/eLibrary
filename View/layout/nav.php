@@ -2,7 +2,7 @@
   <div class="sidebar-collapse">
     <ul class="nav" id="main-menu">
       <li>
-        <a class="" href="./dasbor.php"><i class="fa fa-dashboard"></i> Dashboard</a>
+        <a class="" href="<?php echo $home_url; ?>view/index.php"><i class="fa fa-dashboard"></i> Dashboard</a>
       </li>
 
       <li>

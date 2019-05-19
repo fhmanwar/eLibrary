@@ -1,7 +1,10 @@
 <?php
-	session_start();	
-	unset($_SESSION['user']);
-	unset($_SESSION['timeout']);
-	session_destroy();
-	header("location:index.php");
+// core configuration
+include_once "config/core.php";
+
+// destroy session, it will remove ALL session settings
+session_destroy();
+
+//redirect to login page
+header("Location: {$home_url}login.php");
 ?>
