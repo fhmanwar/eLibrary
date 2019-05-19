@@ -1,11 +1,12 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/config/core.php';
+// include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/config/core.php';
 
-// include database and object files
-include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/config/database.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/objects/buku.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/objects/jenis.php';
+// // include database and object files
+// include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/config/database.php';
+// include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/objects/buku.php';
+// include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/objects/jenis.php';
 
+include $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/view/layout/header.php';
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
@@ -15,14 +16,11 @@ $jenis = new Jenis($db);
 
 $title = "Buku";
 
-include '../layout/head.php';
-include '../layout/header.php';
-include '../layout/nav.php';
 // query products
 $stmt = $buku->readAll();
 
 // specify the page where paging is used
-$page_url = "index.php?";
+// $page_url = "index.php?";
 
 // count total rows - used for pagination
 $total_rows=$buku->countAll();
@@ -76,7 +74,7 @@ $total_rows=$buku->countAll();
 								<td>
 								<?php 
 								$jenis->id = $id_jenis;
-								$jenis->readName();
+								$jenis->read();
 								echo $jenis->nama_jenis;
 								?>
 								</td>

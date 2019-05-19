@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS `anggota` (
 -- Dumping data for table elibrary.anggota: ~2 rows (approximately)
 /*!40000 ALTER TABLE `anggota` DISABLE KEYS */;
 INSERT INTO `anggota` (`id_anggota`, `status_anggota`, `nama_anggota`, `tlp`, `tanggal`) VALUES
-	(2, 'Active', 'picollococo', '87897894654213', '2019-03-18 00:03:31'),
-	(3, 'Active', 'miasda', '654564', '2019-03-18 00:07:30');
+	(2, 'Active', 'picollococo', '87897894654213', '2019-03-18 07:03:31'),
+	(3, 'Active', 'miasda', '654564', '2019-03-18 07:07:30');
 /*!40000 ALTER TABLE `anggota` ENABLE KEYS */;
 
 -- Dumping structure for table elibrary.buku
@@ -48,21 +48,22 @@ CREATE TABLE IF NOT EXISTS `buku` (
   `ringkasan` mediumtext,
   `image` varchar(255) DEFAULT NULL,
   `jml_buku` int(11) DEFAULT NULL,
+  `created` datetime NOT NULL,
   `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_buku`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table elibrary.buku: ~8 rows (approximately)
 /*!40000 ALTER TABLE `buku` DISABLE KEYS */;
-INSERT INTO `buku` (`id_buku`, `id_jenis`, `judul`, `penulis`, `subjek`, `serve_for`, `kode_buku`, `penerbit`, `tahun_terbit`, `status`, `ringkasan`, `image`, `jml_buku`, `tanggal`) VALUES
-	(5, 3, 'Ilmu Pengetahuan Sosial', 'Nur Wahyu Rochmadi', 'Sekolah Menengah Kejuruan', 'Available', 'IPSJD1', 'Buku Sekolah Elektronik (BSE)', '2004', 'Publish', 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.\r\n\r\nA small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.', 'ips.jpg', 20, '2019-05-17 01:30:41'),
-	(6, 3, 'Dasar Kewirausahaan', 'Ir. Hendro', '', 'Available', '', '', '0000', 'Publish', '  ', '20170212035154.jpg', 6, '2019-05-17 20:52:18'),
-	(7, 3, 'PHP Modul', 'Teguh Wahyono', '', 'Available', '', '', '0000', 'Publish', '  ', '20170212145310.jpg', 5, '2019-05-17 20:52:21'),
-	(8, 3, 'Pengantar Teknologi Informasi', 'Eddy Sutanta', '', 'Available', '', '', '0000', 'Publish', '  ', '20170209044244.jpg', 34, '2019-05-17 20:52:26'),
-	(9, 3, 'Kamus Istilah Internet', 'wang cun', '', 'Available', '', '', '0000', 'Publish', '  ', '20170212080423.jpg', 34, '2019-05-17 20:52:31'),
-	(10, 3, 'Kamus Matematika', 'ario', '', 'Available', '', '', '0000', 'Publish', '  ', '20170207102926.jpg', 12, '2019-05-17 20:52:34'),
-	(11, 3, 'E-Learning', 'mario', '', 'Available', '', '', '0000', 'Publish', '  ', '20170209050821.jpg', 55, '2019-05-17 20:52:36'),
-	(12, 3, 'Algoritma C++', 'niawarti', '', 'Available', '', '', '0000', 'Publish', '  ', '20170209045014.jpg', 54, '2019-05-17 20:52:42');
+INSERT INTO `buku` (`id_buku`, `id_jenis`, `judul`, `penulis`, `subjek`, `serve_for`, `kode_buku`, `penerbit`, `tahun_terbit`, `status`, `ringkasan`, `image`, `jml_buku`, `created`, `tanggal`) VALUES
+	(5, 3, 'Ilmu Pengetahuan Sosial', 'Nur Wahyu Rochmadi', 'Sekolah Menengah Kejuruan', 'Available', 'IPSJD1', 'Buku Sekolah Elektronik (BSE)', '2004', 'Publish', 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.\r\n\r\nA small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.', 'ips.jpg', 20, '0000-00-00 00:00:00', '2019-05-17 08:30:41'),
+	(6, 3, 'Dasar Kewirausahaan', 'Ir. Hendro', '', 'Available', '', '', '0000', 'Publish', '  ', '20170212035154.jpg', 6, '0000-00-00 00:00:00', '2019-05-18 03:52:18'),
+	(7, 3, 'PHP Modul', 'Teguh Wahyono', '', 'Available', '', '', '0000', 'Publish', '  ', '20170212145310.jpg', 5, '0000-00-00 00:00:00', '2019-05-18 03:52:21'),
+	(8, 3, 'Pengantar Teknologi Informasi', 'Eddy Sutanta', '', 'Available', '', '', '0000', 'Publish', '  ', '20170209044244.jpg', 34, '0000-00-00 00:00:00', '2019-05-18 03:52:26'),
+	(9, 3, 'Kamus Istilah Internet', 'wang cun', '', 'Available', '', '', '0000', 'Publish', '  ', '20170212080423.jpg', 34, '0000-00-00 00:00:00', '2019-05-18 03:52:31'),
+	(10, 3, 'Kamus Matematika', 'ario', '', 'Available', '', '', '0000', 'Publish', '  ', '20170207102926.jpg', 12, '0000-00-00 00:00:00', '2019-05-18 03:52:34'),
+	(11, 3, 'E-Learning', 'mario', '', 'Available', '', '', '0000', 'Publish', '  ', '20170209050821.jpg', 55, '0000-00-00 00:00:00', '2019-05-18 03:52:36'),
+	(12, 3, 'Algoritma C++', 'niawarti', '', 'Available', '', '', '0000', 'Publish', '  ', '20170209045014.jpg', 54, '0000-00-00 00:00:00', '2019-05-18 03:52:42');
 /*!40000 ALTER TABLE `buku` ENABLE KEYS */;
 
 -- Dumping structure for table elibrary.file
@@ -80,8 +81,8 @@ CREATE TABLE IF NOT EXISTS `file` (
 -- Dumping data for table elibrary.file: ~2 rows (approximately)
 /*!40000 ALTER TABLE `file` DISABLE KEYS */;
 INSERT INTO `file` (`id_file`, `id_buku`, `judul_file`, `nama_file`, `keterangan`, `urutan`, `tanggal`) VALUES
-	(34, 5, 'bab 3', 'agilinilucu.docx', 'qweasd', 2, '2019-03-25 00:44:30'),
-	(35, 5, 'bab 1', 'Tata_Tertib_Kos_Ibu_Said.pdf', 'asdasd', 1, '2019-03-29 23:58:24');
+	(34, 5, 'bab 3', 'agilinilucu.docx', 'qweasd', 2, '2019-03-25 07:44:30'),
+	(35, 5, 'bab 1', 'Tata_Tertib_Kos_Ibu_Said.pdf', 'asdasd', 1, '2019-03-30 06:58:24');
 /*!40000 ALTER TABLE `file` ENABLE KEYS */;
 
 -- Dumping structure for table elibrary.jenis
@@ -100,8 +101,8 @@ CREATE TABLE IF NOT EXISTS `jenis` (
 -- Dumping data for table elibrary.jenis: ~2 rows (approximately)
 /*!40000 ALTER TABLE `jenis` DISABLE KEYS */;
 INSERT INTO `jenis` (`id`, `kode_jenis`, `nama_jenis`, `keterangan`, `urutan`, `tanggal`) VALUES
-	(3, 'I01', 'Ilmu sosial', '', 1, '2019-03-23 01:44:32'),
-	(4, 'bio', 'buku biologi', '  buku ini tentang biologi dalam tumbuhan dan hewan\r\njika ada tambahan, kemungkinan tentang kamasutra', 2, '2019-03-20 00:46:05');
+	(3, 'I01', 'Ilmu sosial', '', 1, '2019-03-23 08:44:32'),
+	(4, 'bio', 'buku biologi', '  buku ini tentang biologi dalam tumbuhan dan hewan\r\njika ada tambahan, kemungkinan tentang kamasutra', 2, '2019-03-20 07:46:05');
 /*!40000 ALTER TABLE `jenis` ENABLE KEYS */;
 
 -- Dumping structure for table elibrary.peminjaman
@@ -121,8 +122,8 @@ CREATE TABLE IF NOT EXISTS `peminjaman` (
 -- Dumping data for table elibrary.peminjaman: ~2 rows (approximately)
 /*!40000 ALTER TABLE `peminjaman` DISABLE KEYS */;
 INSERT INTO `peminjaman` (`id_peminjaman`, `id_buku`, `id_anggota`, `id_user`, `tanggal_pinjam`, `tanggal_kembali`, `keterangan`, `status_kembali`, `tanggal`) VALUES
-	(2, 7, 2, 4, '2019-04-27', '2019-05-11', 'asdweqwe', 'Belum', '2019-04-01 18:23:58'),
-	(5, 7, 4, 4, '2019-04-01', '2019-05-02', 'asdweqwe', 'Belum', '2019-04-01 19:45:27');
+	(2, 7, 2, 4, '2019-04-27', '2019-05-11', 'asdweqwe', 'Belum', '2019-04-02 01:23:58'),
+	(5, 7, 4, 4, '2019-04-01', '2019-05-02', 'asdweqwe', 'Belum', '2019-04-02 02:45:27');
 /*!40000 ALTER TABLE `peminjaman` ENABLE KEYS */;
 
 -- Dumping structure for table elibrary.tbl_category
@@ -258,9 +259,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table elibrary.users: ~3 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `firstname`, `email`, `contact_number`, `address`, `password`, `access_level`, `access_code`, `status`, `created`, `modified`) VALUES
-	(1, 'Mike', 'mike@example.com', '0999999999', 'Blk. 24 A, Lot 6, Ph. 3, Peace Village', '$2y$10$AUBptrm9sQF696zr8Hv31On3x4wqnTihdCLocZmGLbiDvyLpyokL.', 'Admin', '', 1, '2014-10-29 17:31:09', '2016-06-13 18:17:47'),
-	(22, 'jono', 'jon@mail.net', '1235345134', 'Manila', '$2y$10$bjHJiqOa9HA/XWcPdwQ3gu2Iv/tY66sd6P/Q.EymhsPoYlXB5TSSa', 'Customer', 'm0q46Aq3z3hLNXTswzPZ97XZuvfESx3L', 1, '2019-05-18 22:30:42', '2019-05-19 13:18:33'),
-	(23, 'admin', 'admin@admin.com', '9331868359', 'Blk. 24 A, Lot 6, Ph. 3, Peace Village', '$2y$10$5cdLNILxv6w/X3.o4WgmDObwV3UrFI81KWUn9u3gA0O/eiWF4r35C', 'Admin', '0ybHhBcrMdPzqwR8KGaG6xNizp7zY7t8', 1, '2019-05-19 13:14:38', '2019-05-19 13:19:20');
+	(1, 'Mike', 'mike@example.com', '0999999999', 'Blk. 24 A, Lot 6, Ph. 3, Peace Village', '$2y$10$AUBptrm9sQF696zr8Hv31On3x4wqnTihdCLocZmGLbiDvyLpyokL.', 'Admin', '', 1, '2014-10-29 17:31:09', '2016-06-14 01:17:47'),
+	(22, 'jono', 'jon@mail.net', '1235345134', 'Manila', '$2y$10$bjHJiqOa9HA/XWcPdwQ3gu2Iv/tY66sd6P/Q.EymhsPoYlXB5TSSa', 'Customer', 'm0q46Aq3z3hLNXTswzPZ97XZuvfESx3L', 1, '2019-05-18 22:30:42', '2019-05-19 20:18:33'),
+	(23, 'admin', 'admin@admin.com', '9331868359', 'Blk. 24 A, Lot 6, Ph. 3, Peace Village', '$2y$10$5cdLNILxv6w/X3.o4WgmDObwV3UrFI81KWUn9u3gA0O/eiWF4r35C', 'Admin', '0ybHhBcrMdPzqwR8KGaG6xNizp7zY7t8', 1, '2019-05-19 13:14:38', '2019-05-19 20:19:20');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Dumping structure for table elibrary.usulan
@@ -282,9 +283,9 @@ CREATE TABLE IF NOT EXISTS `usulan` (
 -- Dumping data for table elibrary.usulan: ~3 rows (approximately)
 /*!40000 ALTER TABLE `usulan` DISABLE KEYS */;
 INSERT INTO `usulan` (`id_usulan`, `judul`, `penulis`, `penerbit`, `keterangan`, `nama_pengusul`, `email_pengusul`, `ip_add`, `status_usulan`, `tanggal_usulan`, `tanggal`) VALUES
-	(1, 'asdasdasdqweqwe', 'asdasdasd', 'asdasdadw', '    ', 'asdasdd', 'asdasd@afasd.etr', '::1', 'Diterima', '2019-03-30 15:37:28', '2019-03-30 23:03:08'),
-	(2, 'Cerita tentang Midun', 'Marah Rusli', 'PT Andi Offset', NULL, 'Andoyo', 'wikwik@gmail.net', '::1', 'Baru', '2019-03-30 15:42:04', '2019-03-30 21:42:04'),
-	(3, 'Dragon Ball Mencari mangsa', 'Andomir', 'Gramedia', 'Dragon Ball Jalan Jalan  ', 'rayyanwe', 'rayanwe@asd.net', '::1', 'Baru', '2019-03-30 17:04:15', '2019-03-30 23:04:15');
+	(1, 'asdasdasdqweqwe', 'asdasdasd', 'asdasdadw', '    ', 'asdasdd', 'asdasd@afasd.etr', '::1', 'Diterima', '2019-03-30 15:37:28', '2019-03-31 06:03:08'),
+	(2, 'Cerita tentang Midun', 'Marah Rusli', 'PT Andi Offset', NULL, 'Andoyo', 'wikwik@gmail.net', '::1', 'Baru', '2019-03-30 15:42:04', '2019-03-31 04:42:04'),
+	(3, 'Dragon Ball Mencari mangsa', 'Andomir', 'Gramedia', 'Dragon Ball Jalan Jalan  ', 'rayyanwe', 'rayanwe@asd.net', '::1', 'Baru', '2019-03-30 17:04:15', '2019-03-31 06:04:15');
 /*!40000 ALTER TABLE `usulan` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

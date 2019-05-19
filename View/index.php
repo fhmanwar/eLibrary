@@ -46,12 +46,14 @@
 // $total_menu = mysqli_fetch_array($total_menu);
 // $total_menu = $total_menu['num'];
 
-include '../config/core.php';
+// include '../config/core.php';
 
-include '../helper/login_checker.php';
-include_once '../config/database.php';
-include_once '../objects/Admin.php';
-admin_check();
+// include '../helper/login_checker.php';
+// include_once '../config/database.php';
+// include_once '../objects/Admin.php';
+// admin_check();
+
+include $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/view/layout/header.php';
 
 // get database connection
 $database = new Database();
@@ -61,9 +63,6 @@ $total_rows = $dasb->rowCount();
 
 $title = "E-Library";
 
-include 'layout/head.php';
-include 'layout/header.php';
-include 'layout/nav.php';
 
 
 ?>

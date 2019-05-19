@@ -33,15 +33,15 @@ class Jenis{
     function readName(){
 
       $query = "SELECT 
-                    nama_jenis 
+                    id, nama_jenis 
                 FROM 
                     " . $this->table_name . " 
                 WHERE 
                     id = ? 
-                limit 
-                    0,1
-                ";
-
+                    ";
+                    // limit 
+                    //     0,1
+                    
       $stmt = $this->conn->prepare( $query );
       $stmt->bindParam(1, $this->id);
       $stmt->execute();

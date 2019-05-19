@@ -1,7 +1,8 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/config/database.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/objects/buku.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/objects/jenis.php';
+// include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/config/database.php';
+// include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/objects/buku.php';
+// include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/objects/jenis.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/View/layout/header.php';
 
 // get database connection
 $database = new Database();
@@ -13,30 +14,33 @@ $jenis = new Jenis($db);
 
 // set page headers
 $page_title = "Create Product";
-include_once "header.php";
-
-// contents will be here
-echo "<div class='right-button-margin'>";
-    echo "<a href='index.php' class='btn btn-default pull-right'>Read Products</a>";
-echo "</div>";
 
 if($_POST){
 
     // set product property values
-    $product->judul = $_POST['name'];
-    $product->price = $_POST['price'];
-    $product->description = $_POST['description'];
-    $product->id_jenis = $_POST['id_jenis'];
+  	$buku->id_jenis = $_POST['id_jenis'];
+	$buku->judul = $_POST['judul'];
+	$buku->penulis = $_POST['penulis'];
+	$buku->subjek = $_POST['subjek'];
+	$buku->serve_for = $_POST['serve_for'];
+	$buku->kode_buku = $_POST['kode_buku'];
+	$buku->penerbit = $_POST['penerbit'];
+	$buku->tahun_terbit = $_POST['tahun_terbit'];
+	$buku->status = $_POST['status'];
+	$buku->ringkasan = $_POST['ringkasan'];
+	$buku->jml_buku = $_POST['jml_buku'];
+
     $image=!empty($_FILES["image"]["name"])
-            ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"]) : "";
-    $product->image = $image;
+			? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"]) : "";
+    $buku->image = $image;
+    // $buku->price = $_POST['price'];
 
     // create the product
-    if($product->create()){
+    if($buku->create()){
         echo "<div class='alert alert-success'>Product was created.</div>";
         // try to upload the submitted file
         // uploadPhoto() method will return an error message, if any.
-        echo $product->uploadPhoto();
+        echo $buku->uploadPhoto();
     }
 
     // if unable to create the product, tell the user
@@ -72,9 +76,13 @@ if($_POST){
 
 			<div class="form-group form-group-lg">
 				<label>Jenis Buku</label>
+				<?php $stmt = $jenis->read(); ?>
 				<select name="id_jenis" class="form-control">
-					<?php while($stmt_category->fetch()){ ?>
-						<option value="<?php echo $category_data['id_jenis']; ?>"><?php echo $category_data['nama_jenis']; ?></option>
+					<?php
+					while($row_jenis = $stmt->fetch(PDO::FETCH_ASSOC)){
+						extract($row_jenis);
+					?>
+						<option value='<?php $id ?>'><?php echo $nama_jenis ?></option>
 					<?php } ?>
 				</select>
 			</div>
