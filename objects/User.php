@@ -9,7 +9,6 @@ class User{
     // object properties
     public $id;
     public $firstname;
-    public $lastname;
     public $email;
     public $contact_number;
     public $address;
@@ -28,7 +27,7 @@ class User{
     function emailExists(){
 
         // query to check if email exists
-        $query = "SELECT id, firstname, lastname, access_level, password, status
+        $query = "SELECT id, firstname, access_level, password, status
                 FROM " . $this->table_name . "
                 WHERE email = ?
                 LIMIT 0,1";
@@ -57,7 +56,6 @@ class User{
             // assign values to object properties
             $this->id = $row['id'];
             $this->firstname = $row['firstname'];
-            $this->lastname = $row['lastname'];
             $this->access_level = $row['access_level'];
             $this->password = $row['password'];
             $this->status = $row['status'];
@@ -80,7 +78,6 @@ class User{
         $query = "INSERT INTO " . $this->table_name . "
                 SET
             firstname = :firstname,
-            lastname = :lastname,
             email = :email,
             contact_number = :contact_number,
             address = :address,
@@ -95,7 +92,6 @@ class User{
 
         // sanitize
         $this->firstname=htmlspecialchars(strip_tags($this->firstname));
-        $this->lastname=htmlspecialchars(strip_tags($this->lastname));
         $this->email=htmlspecialchars(strip_tags($this->email));
         $this->contact_number=htmlspecialchars(strip_tags($this->contact_number));
         $this->address=htmlspecialchars(strip_tags($this->address));
@@ -106,7 +102,6 @@ class User{
 
         // bind the values
         $stmt->bindParam(':firstname', $this->firstname);
-        $stmt->bindParam(':lastname', $this->lastname);
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':contact_number', $this->contact_number);
         $stmt->bindParam(':address', $this->address);

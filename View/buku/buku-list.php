@@ -4,14 +4,14 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/config/core.php';
 // include database and object files
 include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/config/database.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/objects/buku.php';
-// include_once 'objects/jenis.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/eLibrary/objects/jenis.php';
 
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
 
 $buku = new Buku($db);
-// $category = new Category($db);
+$jenis = new Jenis($db);
 
 $title = "Buku";
 
@@ -57,7 +57,7 @@ $total_rows=$buku->countAll();
 									<th>Cover</th>
 									<th>Judul Buku</th>
 									<th>Penulis</th>
-									<!-- <th>Jenis</th> -->
+									<th>Jenis</th>
 									<th>Status</th>
 									<th>File</th>
 									<th>Action</th>
@@ -71,19 +71,18 @@ $total_rows=$buku->countAll();
 
 							<tr>
 								<td width="10%"><img src="<?php echo $row['image'] ?>" width="60" height="40"/></td>
-								<td><?php echo $row['judul'] ?></td>
-								<td><?php echo $row['penulis']?></td>
-								<!-- <td>
+								<td><?php echo $judul ?></td>
+								<td><?php echo $penulis ?></td>
+								<td>
 								<?php 
-								// $jenis->id = $id_jenis;
-								// $jenis->readName();
-								// echo $jenis->nama_jenis;
+								$jenis->id = $id_jenis;
+								$jenis->readName();
+								echo $jenis->nama_jenis;
 								?>
-								</td> -->
-								<td><?php echo $row['serve_for']?> - <?php echo $row['jml_buku']?> books</td>
+								</td>
+								<td><?php echo $serve_for?> - <?php echo $jml_buku?> books</td>
 								<td><?php //if($x == $data['judul_buku']){echo $no;}else{echo 0;}?> files</td>
 								<!-- <td><?php //echo $data['Price']." ".$currency;?></td> -->
-								<!-- <td width="15%"><?php //echo $data['Category_name'];?></td> -->
 								<td width="15%">
 								<?php include('buku-detail.php');?>
 

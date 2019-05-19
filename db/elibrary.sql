@@ -243,7 +243,6 @@ INSERT INTO `tbl_user` (`id`, `id_anggota`, `username`, `password`, `email`, `na
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(32) NOT NULL,
-  `lastname` varchar(32) NOT NULL,
   `email` varchar(64) NOT NULL,
   `contact_number` varchar(64) NOT NULL,
   `address` text NOT NULL,
@@ -258,10 +257,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- Dumping data for table elibrary.users: ~3 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `contact_number`, `address`, `password`, `access_level`, `access_code`, `status`, `created`, `modified`) VALUES
-	(1, 'Mike', 'Dalisay', 'mike@example.com', '0999999999', 'Blk. 24 A, Lot 6, Ph. 3, Peace Village', '$2y$10$AUBptrm9sQF696zr8Hv31On3x4wqnTihdCLocZmGLbiDvyLpyokL.', 'Admin', '', 1, '2014-10-29 17:31:09', '2016-06-13 18:17:47'),
-	(22, 'jono', 'jhon', 'jon@mail.net', '1235345134', 'Manila', '$2y$10$bjHJiqOa9HA/XWcPdwQ3gu2Iv/tY66sd6P/Q.EymhsPoYlXB5TSSa', 'Customer', 'm0q46Aq3z3hLNXTswzPZ97XZuvfESx3L', 1, '2019-05-18 22:30:42', '2019-05-19 13:18:33'),
-	(23, 'admin', '-', 'admin@admin.com', '9331868359', 'Blk. 24 A, Lot 6, Ph. 3, Peace Village', '$2y$10$5cdLNILxv6w/X3.o4WgmDObwV3UrFI81KWUn9u3gA0O/eiWF4r35C', 'Admin', '0ybHhBcrMdPzqwR8KGaG6xNizp7zY7t8', 1, '2019-05-19 13:14:38', '2019-05-19 13:19:20');
+INSERT INTO `users` (`id`, `firstname`, `email`, `contact_number`, `address`, `password`, `access_level`, `access_code`, `status`, `created`, `modified`) VALUES
+	(1, 'Mike', 'mike@example.com', '0999999999', 'Blk. 24 A, Lot 6, Ph. 3, Peace Village', '$2y$10$AUBptrm9sQF696zr8Hv31On3x4wqnTihdCLocZmGLbiDvyLpyokL.', 'Admin', '', 1, '2014-10-29 17:31:09', '2016-06-13 18:17:47'),
+	(22, 'jono', 'jon@mail.net', '1235345134', 'Manila', '$2y$10$bjHJiqOa9HA/XWcPdwQ3gu2Iv/tY66sd6P/Q.EymhsPoYlXB5TSSa', 'Customer', 'm0q46Aq3z3hLNXTswzPZ97XZuvfESx3L', 1, '2019-05-18 22:30:42', '2019-05-19 13:18:33'),
+	(23, 'admin', 'admin@admin.com', '9331868359', 'Blk. 24 A, Lot 6, Ph. 3, Peace Village', '$2y$10$5cdLNILxv6w/X3.o4WgmDObwV3UrFI81KWUn9u3gA0O/eiWF4r35C', 'Admin', '0ybHhBcrMdPzqwR8KGaG6xNizp7zY7t8', 1, '2019-05-19 13:14:38', '2019-05-19 13:19:20');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Dumping structure for table elibrary.usulan

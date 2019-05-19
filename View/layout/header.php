@@ -6,7 +6,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<?php echo $home_url; ?>view/index.php">E-Library</a>
+        <a class="navbar-brand" href="<?php echo $home_url; ?>view/">E-Library</a>
       </div>
       <div style="color: white;
           padding: 15px 50px 5px 50px;
