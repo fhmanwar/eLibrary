@@ -37,24 +37,24 @@ INSERT INTO `anggota` (`id_anggota`, `status_anggota`, `nama_anggota`, `tlp`, `t
 CREATE TABLE IF NOT EXISTS `buku` (
   `id_buku` int(11) NOT NULL AUTO_INCREMENT,
   `id_jenis` int(11) NOT NULL,
-  `judul_buku` varchar(255) NOT NULL,
-  `penulis_buku` varchar(255) NOT NULL,
-  `subjek_buku` varchar(255) DEFAULT NULL,
-  `Serve_for` enum('Available','Sold Out') DEFAULT NULL,
+  `judul` varchar(255) NOT NULL,
+  `penulis` varchar(255) NOT NULL,
+  `subjek` varchar(255) DEFAULT NULL,
+  `serve_for` enum('Available','Sold Out') DEFAULT NULL,
   `kode_buku` varchar(50) DEFAULT NULL,
   `penerbit` varchar(255) DEFAULT NULL,
   `tahun_terbit` year(4) DEFAULT NULL,
-  `status_buku` enum('Publish','Not_Publish','Missing','') DEFAULT NULL,
+  `status` enum('Publish','Not_Publish','Missing','') DEFAULT NULL,
   `ringkasan` mediumtext,
-  `cover_buku` varchar(255) DEFAULT NULL,
-  `jumlah_buku` int(11) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `jml_buku` int(11) DEFAULT NULL,
   `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_buku`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table elibrary.buku: ~8 rows (approximately)
 /*!40000 ALTER TABLE `buku` DISABLE KEYS */;
-INSERT INTO `buku` (`id_buku`, `id_jenis`, `judul_buku`, `penulis_buku`, `subjek_buku`, `Serve_for`, `kode_buku`, `penerbit`, `tahun_terbit`, `status_buku`, `ringkasan`, `cover_buku`, `jumlah_buku`, `tanggal`) VALUES
+INSERT INTO `buku` (`id_buku`, `id_jenis`, `judul`, `penulis`, `subjek`, `serve_for`, `kode_buku`, `penerbit`, `tahun_terbit`, `status`, `ringkasan`, `image`, `jml_buku`, `tanggal`) VALUES
 	(5, 3, 'Ilmu Pengetahuan Sosial', 'Nur Wahyu Rochmadi', 'Sekolah Menengah Kejuruan', 'Available', 'IPSJD1', 'Buku Sekolah Elektronik (BSE)', '2004', 'Publish', 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.\r\n\r\nA small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.', 'ips.jpg', 20, '2019-05-17 01:30:41'),
 	(6, 3, 'Dasar Kewirausahaan', 'Ir. Hendro', '', 'Available', '', '', '0000', 'Publish', '  ', '20170212035154.jpg', 6, '2019-05-17 20:52:18'),
 	(7, 3, 'PHP Modul', 'Teguh Wahyono', '', 'Available', '', '', '0000', 'Publish', '  ', '20170212145310.jpg', 5, '2019-05-17 20:52:21'),
@@ -86,20 +86,20 @@ INSERT INTO `file` (`id_file`, `id_buku`, `judul_file`, `nama_file`, `keterangan
 
 -- Dumping structure for table elibrary.jenis
 CREATE TABLE IF NOT EXISTS `jenis` (
-  `id_jenis` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode_jenis` varchar(20) NOT NULL,
   `nama_jenis` varchar(50) NOT NULL,
   `keterangan` mediumtext,
   `urutan` int(11) DEFAULT NULL,
   `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_jenis`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `kode_jenis` (`kode_jenis`),
   UNIQUE KEY `nama_jenis` (`nama_jenis`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table elibrary.jenis: ~2 rows (approximately)
 /*!40000 ALTER TABLE `jenis` DISABLE KEYS */;
-INSERT INTO `jenis` (`id_jenis`, `kode_jenis`, `nama_jenis`, `keterangan`, `urutan`, `tanggal`) VALUES
+INSERT INTO `jenis` (`id`, `kode_jenis`, `nama_jenis`, `keterangan`, `urutan`, `tanggal`) VALUES
 	(3, 'I01', 'Ilmu sosial', '', 1, '2019-03-23 01:44:32'),
 	(4, 'bio', 'buku biologi', '  buku ini tentang biologi dalam tumbuhan dan hewan\r\njika ada tambahan, kemungkinan tentang kamasutra', 2, '2019-03-20 00:46:05');
 /*!40000 ALTER TABLE `jenis` ENABLE KEYS */;
@@ -238,6 +238,31 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
 INSERT INTO `tbl_user` (`id`, `id_anggota`, `username`, `password`, `email`, `nama`, `akses_level`) VALUES
 	(1, 0, 'admin', 'a74ac0a61316e8e74256de730cd32a78eac4653f10b485cbb452612367b61fcf', 'developer.solodroid@gmail.com', NULL, NULL);
 /*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
+
+-- Dumping structure for table elibrary.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(32) NOT NULL,
+  `lastname` varchar(32) NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `contact_number` varchar(64) NOT NULL,
+  `address` text NOT NULL,
+  `password` varchar(512) NOT NULL,
+  `access_level` varchar(16) NOT NULL,
+  `access_code` text NOT NULL,
+  `status` int(11) NOT NULL COMMENT '0=pending,1=confirmed',
+  `created` datetime NOT NULL,
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='admin and customer users';
+
+-- Dumping data for table elibrary.users: ~3 rows (approximately)
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `contact_number`, `address`, `password`, `access_level`, `access_code`, `status`, `created`, `modified`) VALUES
+	(1, 'Mike', 'Dalisay', 'mike@example.com', '0999999999', 'Blk. 24 A, Lot 6, Ph. 3, Peace Village', '$2y$10$AUBptrm9sQF696zr8Hv31On3x4wqnTihdCLocZmGLbiDvyLpyokL.', 'Admin', '', 1, '2014-10-29 17:31:09', '2016-06-13 18:17:47'),
+	(22, 'jono', 'jhon', 'jon@mail.net', '1235345134', 'Manila', '$2y$10$bjHJiqOa9HA/XWcPdwQ3gu2Iv/tY66sd6P/Q.EymhsPoYlXB5TSSa', 'Customer', 'm0q46Aq3z3hLNXTswzPZ97XZuvfESx3L', 1, '2019-05-18 22:30:42', '2019-05-19 13:18:33'),
+	(23, 'admin', '-', 'admin@admin.com', '9331868359', 'Blk. 24 A, Lot 6, Ph. 3, Peace Village', '$2y$10$5cdLNILxv6w/X3.o4WgmDObwV3UrFI81KWUn9u3gA0O/eiWF4r35C', 'Admin', '0ybHhBcrMdPzqwR8KGaG6xNizp7zY7t8', 1, '2019-05-19 13:14:38', '2019-05-19 13:19:20');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Dumping structure for table elibrary.usulan
 CREATE TABLE IF NOT EXISTS `usulan` (

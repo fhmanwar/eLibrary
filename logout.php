@@ -6,5 +6,5 @@ include_once "config/core.php";
 session_destroy();
 
 //redirect to login page
-header("Location: {$home_url}login.php");
+header("Location: {$home_url}");
 ?>
