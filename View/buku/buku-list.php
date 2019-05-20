@@ -74,7 +74,7 @@ $total_rows=$buku->countAll();
 								<td>
 								<?php 
 								$jenis->id = $id_jenis;
-								$jenis->read();
+								$jenis->readName();
 								echo $jenis->nama_jenis;
 								?>
 								</td>
